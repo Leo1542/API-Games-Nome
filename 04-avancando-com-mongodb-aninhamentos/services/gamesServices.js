@@ -13,14 +13,13 @@ class gameService{
         }
     }
 
-    async Create(title, year, genre, platform, price) {
+    async Create(title, year, price, descriptions) {
         try {
             const newGame = new Game({
                 title,
                 year,
-                genre,
-                platform,
                 price,
+                descriptions
             });
             await newGame.save()
         } catch(error){
@@ -39,14 +38,13 @@ class gameService{
     }
 
     //Alterando registros no banco
-    async update(id, title, year, genre, plataform, price){
+    async update(id, title, year, price, descriptions){
         try{
             const game = await Game.findByIdAndUpdate(id,{
                 title,
                 year,
-                genre,
-                plataform,
                 price,
+                descriptions
             });
         }catch(error){
             console.log(error)

@@ -14,8 +14,8 @@ const getAllGames = async (req, res) => {
 //Cadastro
 const createGame = async (req, res) => {
     try{
-        const {title, year, genre, platform, price} = req.body;
-        await gameService.Create(title, year, genre, platform, price); 
+        const {title, year, price, descriptions} = req.body;
+        await gameService.Create(title, year, price, descriptions); 
         res.sendStatus(201)
     }catch(error){
         console.log(error);
@@ -49,9 +49,9 @@ const deleteGame = async (req, res) => {
         try{
             if (ObjectId.isValid(req.params.id)){
                 const id = req.params.id
-                const{title,year,genre,plataform,price} = req.body;
-                await gameService.Update(id, title, year, genre, plataform, price)
-                res.sendStatus(200) // Código 200 (OK)
+                const{title,year,price,descriptions} = req.body;
+                await gameService.Update(id, title, year, price, descriptions)
+                res.status(200).json({game}); // Código 200 (OK)
             } else {
                 res.sendStatus(400) // Codigo 400 (BAD REQUEST)
             }
